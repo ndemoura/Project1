@@ -16,6 +16,8 @@ def find_song(userInput):
 
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	json = response.json()
-	return json["artist_names"]
+	if len(json["response"]['hits']) < 3:
+		return artist
+	return json["response"]['hits'][0]["result"]["artist_names"]
 
 print(find_song(userInput))
